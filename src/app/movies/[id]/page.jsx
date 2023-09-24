@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import { gql, useApolloClient, useQuery } from '@apollo/client';
+import client from '@/lib/client';
 
 const GET_MOVIE = gql`
   query ($movieId: String!) {
@@ -14,21 +15,21 @@ const GET_MOVIE = gql`
 `;
 
 export default function Page() {
-  // const client = useApolloClient();
-  const params = useParams();
+
+  const { id } = useParams();
+
   const { loading, error, data } = useQuery(GET_MOVIE, {
     variables: {
-      movieId: params.id,
-    },
+      movieId: id,
+    },client
   });
+  console.log("🍄 ⁝ Page ⁝ data »", data, loading)
 
-  console.log('🍄 ⁝ Page ⁝ data »', data);
 
-  if (!movie) return null;
 
   return (
     <>
-      <h1>test</h1>
+      <h1>{data.movie.title}</h1>
     </>
   );
 }
