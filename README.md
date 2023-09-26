@@ -26,5 +26,5 @@ npm run dev
    ```jsx
    const { loading, data, error } = useQuery(GET_MOVIE);
    ```
-5. 쿼리가...데이터로 꽂힌다...
+5. 요청한 쿼리의 값이 데이터로 꽂힌다
 6. 랜더시 쿼리가 자동으로 실행
