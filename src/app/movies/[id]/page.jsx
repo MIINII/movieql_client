@@ -15,8 +15,7 @@ const GET_MOVIE = gql`
 `;
 
 export default function Page() {
-  const { id } = useParams();
-  console.log('🍄 ⁝ Page ⁝ id »', id); // "55842"
+  const { id } = useParams(); // parameter 가져오기
 
   const {
     data,
@@ -41,13 +40,11 @@ export default function Page() {
     });
   };
 
-  console.log('🍄 ⁝ Page ⁝ data »', data);
-
   return (
     <div>
       <h1>{data?.movie?.title}</h1>
       <span>{data?.movie?.rating}</span>
-      {/* <img src={data?.movie?.medium_cover_image} /> */}
+      <img src={data?.movie?.medium_cover_image} />
       <button onClick={onClick}>{data?.movie?.isLiked ? '싫어요' : '좋아요'}</button>
     </div>
   );

@@ -4,7 +4,6 @@ const GRAPHQL_ENDPOINT = 'http://localhost:4000/';
 
 const client = new ApolloClient({
   uri: GRAPHQL_ENDPOINT,
-
   cache: new InMemoryCache(),
 });
 
