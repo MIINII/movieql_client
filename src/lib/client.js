@@ -1,8 +1,10 @@
-// const { AppoloClient } = require('@apollo/client');
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+
+const GRAPHQL_ENDPOINT = 'http://localhost:4000/';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: GRAPHQL_ENDPOINT,
+
   cache: new InMemoryCache(),
 });
 

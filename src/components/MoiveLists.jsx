@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { gql, useApolloClient } from '@apollo/client';
-import { useEffect } from 'react';
+import { ApolloProvider, gql, useApolloClient } from '@apollo/client';
+// import { useEffect } from 'react';
+// import client from '@/lib/client';
 
 export default function MovieLists({ movies }) {
   console.log('🍄 ⁝ MovieLists ⁝ movies »', movies);

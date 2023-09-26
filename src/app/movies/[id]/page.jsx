@@ -1,35 +1,54 @@
 'use client';
-
-import { useEffect, useState } from 'react';
-import { useSearchParams, useRouter, useParams } from 'next/navigation';
-import { gql, useApolloClient, useQuery } from '@apollo/client';
-import client from '@/lib/client';
+import { useParams } from 'next/navigation';
+import { gql, useQuery } from '@apollo/client';
 
 const GET_MOVIE = gql`
-  query ($movieId: String!) {
+  query getMovie($movieId: String!) {
     movie(id: $movieId) {
       id
       title
+      medium_cover_image
+      rating
+      isLiked @client
     }
   }
 `;
 
 export default function Page() {
-
   const { id } = useParams();
+  console.log('🍄 ⁝ Page ⁝ id »', id); // "55842"
 
-  const { loading, error, data } = useQuery(GET_MOVIE, {
+  const {
+    data,
+    client: { cache },
+  } = useQuery(GET_MOVIE, {
     variables: {
       movieId: id,
-    },client
+    },
   });
-  console.log("🍄 ⁝ Page ⁝ data »", data, loading)
 
+  const onClick = () => {
+    cache.writeFragment({
+      id: `Movie:${id}`,
+      fragment: gql`
+        fragment MovieFragment on Movie {
+          isLiked
+        }
+      `,
+      data: {
+        isLiked: !data.movie.isLiked,
+      },
+    });
+  };
 
+  console.log('🍄 ⁝ Page ⁝ data »', data);
 
   return (
-    <>
-      <h1>{data.movie.title}</h1>
-    </>
+    <div>
+      <h1>{data?.movie?.title}</h1>
+      <span>{data?.movie?.rating}</span>
+      {/* <img src={data?.movie?.medium_cover_image} /> */}
+      <button onClick={onClick}>{data?.movie?.isLiked ? '싫어요' : '좋아요'}</button>
+    </div>
   );
 }
