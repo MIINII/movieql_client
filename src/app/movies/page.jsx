@@ -63,7 +63,7 @@ export default function Page() {
     <div>
       {/* query */}
         {genreArr.map((movie, idx) => (
-          <Link href={`/movies/?genres="${movie}"`} key={idx}>
+          <Link href={`/movies/?genres=${movie}`} key={idx}>
             <button>
               {movie}
             </button>

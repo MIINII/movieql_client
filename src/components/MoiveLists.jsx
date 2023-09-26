@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ApolloProvider, gql, useApolloClient, useQuery } from '@apollo/client';
+import { ApolloProvider, gql, useApolloClient } from '@apollo/client';
 import { useSearchParams } from 'next/navigation';
 // import { useEffect } from 'react';
 // import client from '@/lib/client';
@@ -7,9 +7,8 @@ import { useSearchParams } from 'next/navigation';
 export default function MovieLists({ movies }) {
   const router = useSearchParams(); // query 가져오기
   const query = router.get('genres');
-  console.log("🍄 ⁝ MovieLists ⁝ query »", query)
 
-  const test = movies.filter((movie,idx) => movie.genres.includes(query))
+  const test = movies.filter((movie,idx) => movie.genres.includes(query));
   console.log("🍄 ⁝ MovieLists ⁝ test »", test)
   
 
