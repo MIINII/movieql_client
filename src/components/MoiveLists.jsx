@@ -8,20 +8,23 @@ export default function MovieLists({ movies }) {
   const router = useSearchParams(); // query 가져오기
   const query = router.get('genres');
 
-  const test = movies.filter((movie,idx) => movie.genres.includes(query));
-  console.log("🍄 ⁝ MovieLists ⁝ test »", test)
+  const movieFilter = movies.filter((movie) => movie.genres.includes(query));
   
 
   return (
     <ul>
-      {movies?.map((movie) => (
-        <li key={movie.id}>
-          {/* params */}
-          <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
-        </li>
-      ))}
-
-      {/* {(query !== '') ? (movies.filter((genre)=>{genre.includes(query)})) : 'null'} */}
+      {query !== ''
+        ? movieFilter.map((movie) => (
+            <li key={movie.id}>
+              <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+            </li>
+          ))
+        : movies?.map((movie) => (
+            <li key={movie.id}>
+              {/* params */}
+              <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
+            </li>
+          ))}
     </ul>
   );
 }
