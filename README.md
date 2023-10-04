@@ -55,5 +55,3 @@ export default function Page() {
 }
 
 ```
-
-### params 가져오기
